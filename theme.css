@@ -1,0 +1,237 @@
+/* ===== ULEP | Themes =====
+   Loaded after style.css / pixel-to-data.css / chatbot.css on every page.
+   The pages already use the colour variables below, so a theme is just a
+   new set of values. Light is the default; the others are switched by
+   theme.js through <html data-theme="light | dark | midnight">.
+
+   Two extra tokens cover surfaces that must stay dark in every theme:
+   --deep (the navy panels) and --on-dark (text sitting on them). */
+
+:root {
+    --deep: #0a1f5c;
+    --on-dark: #ffffff;
+
+    --tint-blue: #e8f2ff;
+    --tint-purple: #f1ebff;
+    --checker-a: #e9eff9;
+    --checker-b: #f5f8fd;
+    --flash: #e3efff;
+    --rgb-r: #b3261e;
+    --rgb-g: #1b7a43;
+    --shadow: rgba(10, 31, 92, 0.28);
+    --hover-wash: rgba(10, 31, 92, 0.05);
+
+    color-scheme: light;
+}
+
+/* ---------- Dark: deep navy, the site's own palette turned down ---------- */
+html[data-theme="dark"] {
+    --paper: #0b1424;
+    --white: #121e36;
+    --line: #26385f;
+    --ink: #e6eefc;
+    --muted: #a3b3d1;
+    --navy: #dbe8ff;
+    --blue: #3d9bff;
+    --blue-deep: #62b0ff;
+    --purple: #a07bff;
+    --night: #050b1a;
+
+    --deep: #10285e;
+    --tint-blue: #162b4f;
+    --tint-purple: #261c4d;
+    --checker-a: #1a2744;
+    --checker-b: #131d33;
+    --flash: #1d3a68;
+    --rgb-r: #ff8a85;
+    --rgb-g: #5fd496;
+    --shadow: rgba(0, 0, 0, 0.55);
+    --hover-wash: rgba(255, 255, 255, 0.06);
+
+    color-scheme: dark;
+}
+
+/* ---------- Midnight: true black for OLED screens ---------- */
+html[data-theme="midnight"] {
+    --paper: #000000;
+    --white: #0a0e18;
+    --line: #1c2640;
+    --ink: #eef3ff;
+    --muted: #97a5c3;
+    --navy: #e3edff;
+    --blue: #3d9bff;
+    --blue-deep: #62b0ff;
+    --purple: #a07bff;
+    --night: #000000;
+
+    --deep: #0a1a42;
+    --tint-blue: #0f1d38;
+    --tint-purple: #1d1540;
+    --checker-a: #141b2e;
+    --checker-b: #0a0e18;
+    --flash: #15305c;
+    --rgb-r: #ff8a85;
+    --rgb-g: #5fd496;
+    --shadow: rgba(0, 0, 0, 0.8);
+    --hover-wash: rgba(255, 255, 255, 0.06);
+
+    color-scheme: dark;
+}
+
+
+/* ---------- Logo: transparent PNG, with a light-ink copy for dark themes ---------- */
+.logo-dark { display: none !important; }
+
+html[data-theme="dark"] .logo-light,
+html[data-theme="midnight"] .logo-light { display: none !important; }
+
+html[data-theme="dark"] .logo-dark,
+html[data-theme="midnight"] .logo-dark { display: block !important; }
+
+
+/* ---------- Theme picker ---------- */
+.theme-wrap {
+    position: relative;
+    flex: none;
+}
+
+.theme-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    min-width: 44px;
+    padding: 0 12px;
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.theme-btn:hover {
+    border-color: var(--blue);
+}
+
+.theme-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.theme-btn .theme-label {
+    display: none;
+}
+
+.theme-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 60;
+    min-width: 214px;
+    padding: 6px;
+    list-style: none;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 14px 36px var(--shadow);
+}
+
+.theme-menu[hidden] {
+    display: none;
+}
+
+.theme-menu button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 12px;
+    font-family: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+    text-align: left;
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.theme-menu button:hover {
+    background: var(--hover-wash);
+}
+
+.theme-menu button[aria-checked="true"] {
+    color: var(--blue-deep);
+    background: var(--hover-wash);
+}
+
+.theme-menu small {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+/* little preview chip: page colour with an accent pixel */
+.theme-chip {
+    flex: none;
+    position: relative;
+    width: 26px;
+    height: 20px;
+    border: 1.5px solid var(--line);
+    border-radius: 4px;
+}
+
+.theme-chip::after {
+    content: "";
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+    width: 7px;
+    height: 7px;
+    background: #3d9bff;
+}
+
+.theme-chip[data-chip="light"] { background: #f5f8fd; }
+.theme-chip[data-chip="dark"] { background: #0b1424; }
+.theme-chip[data-chip="midnight"] { background: #000; }
+.theme-chip[data-chip="auto"] { background: linear-gradient(105deg, #f5f8fd 50%, #0b1424 50%); }
+
+/* a short fade when the theme changes, but never for reduced motion */
+html.theme-fade,
+html.theme-fade *,
+html.theme-fade *::before,
+html.theme-fade *::after {
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html.theme-fade,
+    html.theme-fade *,
+    html.theme-fade *::before,
+    html.theme-fade *::after {
+        transition: none !important;
+    }
+}
+
+
+/* ---------- Things the shared colour variables don't reach ---------- */
+html[data-theme="dark"] .search input::placeholder,
+html[data-theme="midnight"] .search input::placeholder {
+    color: #7c8cab;
+}
+
+html[data-theme="dark"] img.photo-dim,
+html[data-theme="midnight"] img.photo-dim {
+    filter: brightness(0.9);
+}

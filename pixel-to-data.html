@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ULEP | Pixel to Data</title>
+    <meta name="theme-color" content="#ffffff">
+    <script src="theme.js"></script>
+    <link rel="icon" href="logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Sora:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="pixel-to-data.css">
+    <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="theme.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR on desktop, turns into a horizontal bar on small screens -->
+    <aside class="side">
+
+        <a class="side-brand" href="index.html" aria-label="ULEP home">
+            <img class="logo-light" src="logo-crop.png" alt="ULEP" width="412" height="277">
+            <img class="logo-dark" src="logo-crop-dark.png" alt="" width="412" height="277">
+        </a>
+
+        <nav class="side-nav" role="tablist" aria-label="Tools" aria-orientation="vertical">
+            <button class="tab is-active" type="button" data-tab="image" id="tab-image" role="tab" aria-selected="true" aria-controls="panel-image">
+                <span class="tab-ico" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5.5-5.5 4 4 2.5-2.5L20 18"/></svg>
+                </span>
+                <span>Image Lab</span>
+            </button>
+            <button class="tab" type="button" data-tab="pixel" id="tab-pixel" role="tab" aria-selected="false" aria-controls="panel-pixel">
+                <span class="tab-ico" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg>
+                </span>
+                <span>Pixel Lab</span>
+            </button>
+            <button class="tab" type="button" data-tab="quiz" id="tab-quiz" role="tab" aria-selected="false" aria-controls="panel-quiz">
+                <span class="tab-ico" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.7.4-1.1.9-1.1 1.8"/><path d="M12 17h.01"/></svg>
+                </span>
+                <span>Quiz</span>
+            </button>
+        </nav>
+
+        <div class="side-tools" data-theme-slot></div>
+
+        <a class="side-back" href="index.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+            Back to ULEP
+        </a>
+
+    </aside>
+
+
+    <div class="stage">
+
+        <main>
+
+            <!-- ============ IMAGE LAB ============ -->
+            <section class="panel is-active" id="panel-image" role="tabpanel" aria-labelledby="tab-image">
+
+                <header class="panel-head">
+                    <div>
+                        <h1>Image Lab</h1>
+                        <p class="intro">Change the size, quality and format of a picture and watch every step happen. Your image never leaves your browser.</p>
+                    </div>
+                </header>
+
+                <!-- compact upload bar -->
+                <div class="uploadbar">
+                    <input id="fileInput" type="file" accept="image/*" hidden>
+                    <button class="btn btn-sm" type="button" id="chooseBtn">Choose image</button>
+                    <p class="filename" id="fileName">No image yet. You can also drop one onto the preview.</p>
+                    <div class="bar-actions">
+                        <label class="toggle" for="liveToggle">
+                            <input type="checkbox" id="liveToggle" checked>
+                            <span>Live preview</span>
+                        </label>
+                        <button class="btn btn-sm btn-blue" type="button" id="processBtn" disabled>Process Image</button>
+                        <button class="btn btn-sm btn-outline" type="button" id="downloadBtn" disabled>Download</button>
+                    </div>
+                </div>
+
+                <div class="lab">
+
+                    <!-- controls -->
+                    <div class="controls box">
+                        <h2 class="box-title">Adjustments</h2>
+
+                        <div class="field">
+                            <label for="widthInput">Width <small>pixels</small></label>
+                            <input id="widthInput" type="number" min="1" max="8000" placeholder="-" disabled>
+                        </div>
+
+                        <div class="field">
+                            <label for="heightInput">Height <small>pixels</small></label>
+                            <input id="heightInput" type="number" min="1" max="8000" placeholder="-" disabled>
+                        </div>
+
+                        <label class="toggle" for="ratioCheck">
+                            <input id="ratioCheck" type="checkbox" checked disabled>
+                            <span>Keep aspect ratio</span>
+                        </label>
+
+                        <div class="field">
+                            <span class="field-label">Quick scale</span>
+                            <div class="chips" id="scaleChips">
+                                <button type="button" class="chip" data-scale="0.1" disabled>10%</button>
+                                <button type="button" class="chip" data-scale="0.25" disabled>25%</button>
+                                <button type="button" class="chip" data-scale="0.5" disabled>50%</button>
+                                <button type="button" class="chip" data-scale="1" disabled>100%</button>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="quality">Quality <output id="qualityLabel">85%</output></label>
+                            <input id="quality" type="range" min="10" max="100" value="85" disabled>
+                            <p class="hint" id="qualityHint">Lower quality means a smaller file.</p>
+                        </div>
+
+                        <div class="field">
+                            <label for="format">Output format</label>
+                            <select id="format" disabled>
+                                <option value="image/jpeg">JPEG</option>
+                                <option value="image/png">PNG</option>
+                                <option value="image/webp">WebP</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <!-- preview + process -->
+                    <div class="work">
+
+                        <div class="compare">
+
+                            <figure class="shot" id="dropZone">
+                                <figcaption>
+                                    <strong>Original</strong>
+                                    <span id="origMeta">-</span>
+                                </figcaption>
+                                <div class="frame" id="preview">
+                                    <div class="empty">
+                                        <div class="mini-pixels" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                                        <p>Choose or drop an image to begin.</p>
+                                    </div>
+                                </div>
+                            </figure>
+
+                            <figure class="shot">
+                                <figcaption>
+                                    <strong>Processed</strong>
+                                    <span id="resMeta">-</span>
+                                </figcaption>
+                                <div class="frame" id="resultPreview">
+                                    <div class="empty">
+                                        <p>The result appears here.</p>
+                                    </div>
+                                    <div class="busy" id="busy" hidden><span></span><span></span><span></span></div>
+                                </div>
+                            </figure>
+
+                        </div>
+
+                        <label class="toggle view-toggle" for="pixelView">
+                            <input type="checkbox" id="pixelView">
+                            <span>Show real pixels (sharp squares instead of smoothing)</span>
+                        </label>
+
+                        <!-- the process, step by step -->
+                        <div class="box process">
+                            <h2 class="box-title">What is happening</h2>
+
+                            <ol class="pipe" id="pipe">
+                                <li data-step="read"><b>Read</b><span>waiting</span></li>
+                                <li data-step="resize"><b>Resize</b><span>waiting</span></li>
+                                <li data-step="draw"><b>Draw pixels</b><span>waiting</span></li>
+                                <li data-step="encode"><b>Encode</b><span>waiting</span></li>
+                                <li data-step="done"><b>Result</b><span>waiting</span></li>
+                            </ol>
+
+                            <div class="numbers">
+                                <div class="num"><span>Pixels</span><strong id="nPixels">-</strong></div>
+                                <div class="num"><span>Raw data (RGB)</span><strong id="nRaw">-</strong></div>
+                                <div class="num"><span>File size</span><strong id="nFile">-</strong></div>
+                                <div class="num"><span>Change</span><strong id="nSaved">-</strong></div>
+                            </div>
+
+                            <div class="log-head">
+                                <h3>Activity</h3>
+                                <button type="button" class="link-btn" id="clearLog">Clear</button>
+                            </div>
+                            <ul class="log" id="log" aria-live="polite">
+                                <li class="log-empty">Every change you make will be listed here.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ============ PIXEL LAB ============ -->
+            <section class="panel" id="panel-pixel" role="tabpanel" aria-labelledby="tab-pixel" hidden>
+
+                <header class="panel-head">
+                    <div>
+                        <h1>Pixel Lab</h1>
+                        <p class="intro">An image is a grid of tiny squares. Paint some, then see the numbers the computer keeps for them.</p>
+                    </div>
+                </header>
+
+                <div class="plab">
+
+                    <div class="box pgrid-box">
+
+                        <div class="mode" role="group" aria-label="Colour mode">
+                            <button type="button" class="mode-btn is-on" id="modeColor" aria-pressed="true">Color (24-bit)</button>
+                            <button type="button" class="mode-btn" id="modeBW" aria-pressed="false">Black and white (1-bit)</button>
+                        </div>
+
+                        <div class="pgrid-wrap">
+                            <div class="pgrid" id="pgrid" role="grid" aria-label="Pixel canvas"></div>
+                        </div>
+
+                        <div class="ptools">
+                            <label class="inline">
+                                <span>Grid</span>
+                                <select id="gridSize">
+                                    <option value="8">8 x 8</option>
+                                    <option value="12">12 x 12</option>
+                                    <option value="16">16 x 16</option>
+                                </select>
+                            </label>
+                            <button type="button" class="btn btn-sm btn-outline" id="btnSample">Sample</button>
+                            <button type="button" class="btn btn-sm btn-outline" id="btnRandom">Random</button>
+                            <button type="button" class="btn btn-sm btn-outline" id="btnInvert">Invert</button>
+                            <button type="button" class="btn btn-sm btn-outline" id="btnClear">Clear</button>
+                        </div>
+                        <p class="hint" id="paintHint">Click or drag across the squares to paint with the colour on the right.</p>
+                    </div>
+
+
+                    <div class="pside">
+
+                        <div class="box" id="colorTools">
+                            <h2 class="box-title">Colour</h2>
+
+                            <div class="mode small" role="group" aria-label="Tool">
+                                <button type="button" class="mode-btn is-on" id="toolPaint" aria-pressed="true">Paint</button>
+                                <button type="button" class="mode-btn" id="toolPick" aria-pressed="false">Pick colour</button>
+                            </div>
+
+                            <div class="swatch-row">
+                                <input type="color" id="pickColor" value="#1e88f0" aria-label="Pick a colour">
+                                <div>
+                                    <strong id="hexOut">#1E88F0</strong>
+                                    <span class="hint">brush colour</span>
+                                </div>
+                            </div>
+
+                            <div class="rgb">
+                                <label class="r" for="rR">R <output id="oR">30</output></label>
+                                <input type="range" id="rR" min="0" max="255" value="30">
+                                <label class="g" for="rG">G <output id="oG">136</output></label>
+                                <input type="range" id="rG" min="0" max="255" value="136">
+                                <label class="b" for="rB">B <output id="oB">240</output></label>
+                                <input type="range" id="rB" min="0" max="255" value="240">
+                            </div>
+
+                            <div class="palette" id="palette" aria-label="Quick colours"></div>
+                        </div>
+
+                        <div class="box" id="bwTools" hidden>
+                            <h2 class="box-title">Black and white</h2>
+                            <p class="hint">Each square keeps only one bit: <b>0 = black</b>, <b>1 = white</b>. Click a square to flip it.</p>
+                            <div class="field">
+                                <label for="threshold">Brightness cut-off <output id="oT">128</output></label>
+                                <input type="range" id="threshold" min="1" max="254" value="128">
+                                <p class="hint">Squares brighter than this become 1, the rest become 0.</p>
+                            </div>
+                        </div>
+
+                        <div class="box">
+                            <h2 class="box-title">Selected pixel</h2>
+                            <div class="inspect" id="inspect">
+                                <div class="inspect-sw" id="inSw"></div>
+                                <dl>
+                                    <dt>Position</dt><dd id="inPos">-</dd>
+                                    <dt>RGB</dt><dd id="inRgb">-</dd>
+                                    <dt id="inBinLabel">Binary</dt><dd class="mono" id="inBin">-</dd>
+                                </dl>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="box pdata">
+                        <div class="log-head">
+                            <h2 class="box-title">The data behind your picture</h2>
+                            <span class="hint" id="dataNote"></span>
+                        </div>
+
+                        <div class="numbers">
+                            <div class="num"><span>Pixels</span><strong id="pPixels">64</strong></div>
+                            <div class="num"><span>Bits per pixel</span><strong id="pBits">24</strong></div>
+                            <div class="num"><span>Total bits</span><strong id="pTotal">1,536</strong></div>
+                            <div class="num"><span>Bytes</span><strong id="pBytes">192</strong></div>
+                        </div>
+
+                        <div class="matrix-scroll" tabindex="0" aria-label="Pixel data, one row per line">
+                            <pre class="matrix mono" id="matrix"></pre>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- ============ QUIZ ============ -->
+            <section class="panel" id="panel-quiz" role="tabpanel" aria-labelledby="tab-quiz" hidden>
+
+                <header class="panel-head">
+                    <div>
+                        <h1>Quiz</h1>
+                        <p class="intro" id="quizIntro">Ten random questions about pixels, colour and data. Every round is different.</p>
+                    </div>
+                </header>
+
+                <div class="quizwrap box">
+
+                    <div class="qprogress" aria-hidden="true"><i id="qBar"></i></div>
+
+                    <div id="quizBody"></div>
+
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="foot">
+            <p><strong>ULEP.</strong> Where you can edit and learn!</p>
+            <p>Educational project &middot; Bacolod City College &middot; BSIS &ndash; ACT &ndash; 1D &middot; COMP 1 &ndash; Introduction to Computing</p>
+        </footer>
+
+    </div>
+
+</div>
+
+<script src="pixel-to-data.js"></script>
+<script src="chatbot.js"></script>
+</body>
+</html>

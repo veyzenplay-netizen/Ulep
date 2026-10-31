@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ULEP | Edit and Learn</title>
+    <meta name="theme-color" content="#ffffff">
+    <script src="theme.js"></script>
+    <link rel="icon" href="logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Sora:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="theme.css">
+</head>
+
+<body>
+
+    <!-- HEADER: logo, menu and search sit side by side in one row -->
+    <header class="site-header">
+
+        <a class="brand" href="#home" aria-label="ULEP home">
+            <img class="logo-light" src="logo-crop.png" alt="ULEP" width="412" height="277">
+            <img class="logo-dark" src="logo-crop-dark.png" alt="" width="412" height="277">
+        </a>
+
+        <nav class="menu" aria-label="Main">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#disclaimer">Disclaimer</a></li>
+                <li><a href="#learning">Learning</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-tools">
+            <form class="search" role="search" id="searchForm">
+                <label class="sr-only" for="searchInput">Search this site</label>
+                <input type="search" id="searchInput" placeholder="Type to search" autocomplete="off">
+                <button type="submit">Search</button>
+                <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>
+            </form>
+            <div data-theme-slot></div>
+        </div>
+
+    </header>
+
+    <main>
+
+        <!-- HOME / COVER -->
+        <section class="hero" id="home">
+
+            <canvas id="heroCanvas" aria-hidden="true"></canvas>
+
+            <div class="hero-inner">
+
+                <p class="welcome">Welcome to the ULEP site</p>
+
+                <h1>Where you can edit and learn!</h1>
+
+                <p class="lead">
+                    Making digital images to data conversion easier to
+                    understand. Explore our website to edit your images,
+                    adjust their size, reduce file size, and discover how
+                    digital images work.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#about" class="btn btn-primary">Explore more</a>
+                    <a href="#learning" class="btn btn-ghost">How it works</a>
+                    <a href="pixel-to-data.html" class="btn btn-try">Try ULEP</a>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ABOUT / TEAM -->
+        <section class="section" id="about">
+            <div class="wrap">
+
+                <h2>About our team</h2>
+
+                <p class="intro">
+                    ULEP was created through teamwork, cooperation, and
+                    shared ideas. Each member contributed time, effort, and
+                    skills to help plan, design, develop, and complete this
+                    website.
+                </p>
+
+                <div class="team" id="team" role="region" aria-roledescription="carousel" aria-label="Team members">
+
+                    <div class="team-head">
+                        <h3 class="subhead">Meet Our Team</h3>
+                        <p class="team-sub">Auto-advancing project roles &amp; contributions</p>
+                    </div>
+
+                    <div class="team-card" id="teamCard">
+
+                        <div class="team-progress" aria-hidden="true"><i id="teamBar"></i></div>
+
+                        <button class="team-pause" id="teamPause" type="button" aria-pressed="false">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1"/><rect x="14" y="4" width="5" height="16" rx="1"/></svg>
+                            <span>Pause</span>
+                        </button>
+
+                        <div class="team-slides" id="teamSlides" aria-live="off">
+
+                            <article class="member leader is-active" role="group" aria-roledescription="slide" aria-label="1 of 5">
+                                <span class="badge badge-leader">Team leader</span>
+                                <h4>Henzel Mark Galvesolo</h4>
+                                <p class="role">Leader / Website Director / QA</p>
+                                <div class="contrib">
+                                    <h5>Contributions</h5>
+                                    <ul>
+                                        <li>Team leadership</li>
+                                        <li>Website direction</li>
+                                        <li>Quality assurance (QA)</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="member" role="group" aria-roledescription="slide" aria-label="2 of 5">
+                                <span class="badge">Team member</span>
+                                <h4>Angelbert Gido</h4>
+                                <p class="role">Lead Developer / Improvement</p>
+                                <div class="contrib">
+                                    <h5>Contributions</h5>
+                                    <ul>
+                                        <li>Lead development</li>
+                                        <li>System improvements</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="member" role="group" aria-roledescription="slide" aria-label="3 of 5">
+                                <span class="badge">Team member</span>
+                                <h4>Sabina Go</h4>
+                                <p class="role">Lead Graphics Designer</p>
+                                <div class="contrib">
+                                    <h5>Contributions</h5>
+                                    <ul>
+                                        <li>Lead graphics design</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="member" role="group" aria-roledescription="slide" aria-label="4 of 5">
+                                <span class="badge">Team member</span>
+                                <h4>Jayana Equito</h4>
+                                <p class="role">Developer / Improvement / QA</p>
+                                <div class="contrib">
+                                    <h5>Contributions</h5>
+                                    <ul>
+                                        <li>Development</li>
+                                        <li>System improvements</li>
+                                        <li>Quality assurance (QA)</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="member" role="group" aria-roledescription="slide" aria-label="5 of 5">
+                                <span class="badge">Team member</span>
+                                <h4>Nathaniel Lizare</h4>
+                                <p class="role">Graphics Designer</p>
+                                <div class="contrib">
+                                    <h5>Contributions</h5>
+                                    <ul>
+                                        <li>Graphics design</li>
+                                    </ul>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="team-nav">
+                            <button class="team-btn" id="teamPrev" type="button" aria-label="Previous member">&#10094; Prev</button>
+                            <div class="team-dots" id="teamDots" role="group" aria-label="Choose a team member"></div>
+                            <button class="team-btn" id="teamNext" type="button" aria-label="Next member">Next &#10095;</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <p class="closing">
+                    Together, we worked to create a simple and useful website
+                    that allows users to edit images and understand how
+                    digital image processing works.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- DISCLAIMER -->
+        <section class="section dark" id="disclaimer">
+            <div class="wrap split">
+
+                <div>
+                    <h2>Website disclaimer</h2>
+                    <p class="intro">Please read this before you use ULEP.</p>
+                </div>
+
+                <ul class="notice">
+                    <li>
+                        <strong>A student project.</strong>
+                        ULEP is an educational website. It gives you a simple
+                        way to explore basic digital image editing and learn
+                        how images are processed.
+                    </li>
+                    <li>
+                        <strong>Results may vary.</strong>
+                        Image processing results depend on the original image
+                        and the settings you choose. Resizing and compression
+                        may affect image quality.
+                    </li>
+                    <li>
+                        <strong>Your images.</strong>
+                        Make sure you have permission to use any image you
+                        upload. Avoid uploading private or sensitive images.
+                    </li>
+                    <li>
+                        <strong>Not professional software.</strong>
+                        ULEP is meant for learning. It is not a substitute for
+                        professional image-editing software.
+                    </li>
+                </ul>
+
+            </div>
+        </section>
+
+
+        <!-- LEARNING -->
+        <section class="section" id="learning">
+            <div class="wrap">
+
+                <h2>Learn about digital images</h2>
+
+                <p class="intro">
+                    Discover how digital images work and how you can manage
+                    them using ULEP.
+                </p>
+
+                <div class="concepts">
+
+                    <div class="concept">
+                        <h3>Pixels</h3>
+                        <p>Pixels are the tiny elements that form a digital image.</p>
+                    </div>
+
+                    <div class="concept">
+                        <h3>Resolution</h3>
+                        <p>Resolution refers to the number of pixels in an image.</p>
+                    </div>
+
+                    <div class="concept">
+                        <h3>Image resizing</h3>
+                        <p>Resizing changes the width and height of an image.</p>
+                    </div>
+
+                    <div class="concept">
+                        <h3>Image compression</h3>
+                        <p>Compression reduces an image's file size to make it easier to store or share.</p>
+                    </div>
+
+                    <div class="concept">
+                        <h3>RGB colors</h3>
+                        <p>RGB stands for Red, Green, and Blue, which are combined to create colors.</p>
+                    </div>
+
+                    <div class="concept">
+                        <h3>Image file formats</h3>
+                        <p>Learn about common image formats such as JPEG and PNG.</p>
+                    </div>
+
+                </div>
+
+                <h2 class="how-title">How to use ULEP</h2>
+
+                <ol class="steps">
+                    <li>Upload an image from your device.</li>
+                    <li>Preview your selected image.</li>
+                    <li>Adjust the image width and height.</li>
+                    <li>Choose the image quality and output format.</li>
+                    <li>Click Process Image.</li>
+                    <li>Download your processed image.</li>
+                </ol>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+
+        <p class="footer-logo">ULEP.</p>
+
+        <p>Where you can edit and learn!</p>
+        <p>Understanding digital images and data conversion</p>
+
+        <p class="copyright">&copy; 2026 ULEP. All rights reserved.</p>
+
+    </footer>
+
+
+    <script>
+        /* ---------- Cover image: starts as big pixel blocks, sharpens into the photo ---------- */
+        (function () {
+            var hero = document.getElementById('home');
+            var canvas = document.getElementById('heroCanvas');
+            if (!canvas || !canvas.getContext) return;
+
+            var ctx = canvas.getContext('2d');
+            var off = document.createElement('canvas');
+            var octx = off.getContext('2d');
+            var img = new Image();
+            var loaded = false;
+            var block = 1;
+            var w = 0, h = 0;
+
+            function draw(b) {
+                if (!loaded) return;
+                var r = Math.max(w / img.width, h / img.height);
+                var dw = img.width * r, dh = img.height * r;
+                var dx = (w - dw) / 2, dy = (h - dh) / 2;
+
+                ctx.clearRect(0, 0, w, h);
+
+                if (b <= 1) {
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = 'high';
+                    ctx.drawImage(img, dx, dy, dw, dh);
+                    return;
+                }
+
+                var sw = Math.max(1, Math.ceil(w / b));
+                var sh = Math.max(1, Math.ceil(h / b));
+                off.width = sw;
+                off.height = sh;
+                octx.imageSmoothingEnabled = true;
+                octx.drawImage(img, dx / b, dy / b, dw / b, dh / b);
+
+                ctx.imageSmoothingEnabled = false;
+                ctx.drawImage(off, 0, 0, sw, sh, 0, 0, sw * b, sh * b);
+            }
+
+            function resize() {
+                w = hero.clientWidth;
+                h = hero.clientHeight;
+                canvas.width = w;
+                canvas.height = h;
+                draw(block);
+            }
+
+            img.onload = function () {
+                loaded = true;
+                resize();
+
+                var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                if (reduce) { block = 1; draw(1); canvas.classList.add('ready'); return; }
+
+                var steps = [72, 52, 38, 28, 20, 14, 10, 6, 3, 1];
+                var i = 0;
+                block = steps[0];
+                draw(block);
+                canvas.classList.add('ready');
+
+                var timer = setInterval(function () {
+                    i++;
+                    block = steps[Math.min(i, steps.length - 1)];
+                    draw(block);
+                    if (block === 1) clearInterval(timer);
+                }, 170);
+            };
+
+            img.src = 'bcc.png';
+            window.addEventListener('resize', resize);
+        })();
+
+
+        /* ---------- Search: jumps to the first place on the page that matches ---------- */
+        (function () {
+            var form = document.getElementById('searchForm');
+            var input = document.getElementById('searchInput');
+            var status = document.getElementById('searchStatus');
+            var selectors = ['.member', '.concept', '.steps li', '.notice li', 'main section'];
+            var flashTimer;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var q = input.value.trim().toLowerCase();
+                status.textContent = '';
+                if (!q) return;
+
+                var found = null;
+                for (var s = 0; s < selectors.length && !found; s++) {
+                    var list = document.querySelectorAll(selectors[s]);
+                    for (var i = 0; i < list.length; i++) {
+                        if (list[i].textContent.toLowerCase().indexOf(q) !== -1) {
+                            found = list[i];
+                            break;
+                        }
+                    }
+                }
+
+                if (!found) {
+                    status.textContent = 'No results for \u201C' + input.value.trim() + '\u201D';
+                    return;
+                }
+
+                if (window.ulepTeam && found.classList.contains('member')) {
+                    window.ulepTeam.show(found);
+                }
+                found.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                found.classList.add('flash');
+                clearTimeout(flashTimer);
+                flashTimer = setTimeout(function () { found.classList.remove('flash'); }, 2200);
+            });
+
+            input.addEventListener('input', function () { status.textContent = ''; });
+        })();
+    </script>
+
+<script src="team.js"></script>
+<script src="chatbot.js"></script>
+</body>
+</html>
